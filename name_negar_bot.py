@@ -9,7 +9,7 @@ RECIPIENT, TEXT, DATE, SIGN, TONE = range(5)
 openai.api_key = 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
 
 def start(update, context):
-    update.message.reply_text("سلام! من می‌توانم به شما در نوشتن یک نامه کمک کنم. نام گیرنده یا گیرنده‌ها را با / جدا کنید و در خطوط جداگانه وارد کنید:")
+    update.message.reply_text("سلام! من می‌توانم به شما در نوشتن یک نامه کمک کنم. نام گیرنده یا گیرنده‌ها را با / جدا کنید :")
     return RECIPIENT
 
 def collect_recipient(update, context):
@@ -30,7 +30,7 @@ def collect_date(update, context):
 
 def collect_sign(update, context):
     context.user_data['sign'] = update.message.text
-    update.message.reply_text("لطفاً تنها یکی از تنهاهای زیر را انتخاب کنید: فرمال، دوستانه، فوری، خشمگین.")
+    update.message.reply_text("لطفاً تنها یکی از تنهاهای زیر را انتخاب کنید: رسمی، دوستانه، فوری، خشمگین.")
     return TONE
 
 def collect_tone(update, context):
@@ -57,13 +57,13 @@ def send_to_gpt(user_data, tone):
 
     # Define the GPT-3 prompt based on the selected tone
     if tone == 'فرمال':
-        prompt = f"Generate a formal letter:\n\n{letter}"
+        prompt = f"Generate a formal letter in persian:\n\n{letter}"
     elif tone == 'دوستانه':
-        prompt = f"Generate a friendly letter:\n\n{letter}"
+        prompt = f"Generate a friendly letter in persian:\n\n{letter}"
     elif tone == 'فوری':
-        prompt = f"Generate an urgent letter:\n\n{letter}"
+        prompt = f"Generate an urgent letter in persian:\n\n{letter}"
     elif tone == 'خشمگین':
-        prompt = f"Generate an angry letter:\n\n{letter}"
+        prompt = f"Generate an angry letter in persian:\n\n{letter}"
 
     # Send the prompt to GPT-3 and receive the response
     response = openai.Completion.create(
